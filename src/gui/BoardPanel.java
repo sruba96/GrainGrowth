@@ -16,6 +16,7 @@ public class BoardPanel extends JPanel {
     private int[][] grid;
     private int generationCounter;
     private boolean periodic = false;
+    private int selectedIndex = 0;
     public Timer timer;
     private int width = PANELSIZE;
     private int height = PANELSIZE;
@@ -25,10 +26,12 @@ public class BoardPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                boardPanel.updateGrid();
-//                boardPanel.repaint();
+//                updateGrid();
+                repaint();
             }
         });
+
+        clearAll();
     }
 
     public void clearAll() {
@@ -69,5 +72,13 @@ public class BoardPanel extends JPanel {
 
     public void setPeriodic(boolean periodic) {
         this.periodic = periodic;
+    }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
     }
 }

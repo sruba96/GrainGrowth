@@ -34,9 +34,9 @@ public class SouthPanel extends JPanel {
 
         JComboBox choiceComboBox = new JComboBox(StructureType.values());
         choiceComboBox.addActionListener(e -> {
-            this.selectedStructureIndex = choiceComboBox.getSelectedIndex();
-    //hire is important,         // boardPanel.setSelectedIndex(this.selectedStructureIndex);
+            boardPanel.setSelectedIndex(choiceComboBox.getSelectedIndex());
         });
+
         this.add(startButton);
         this.add(stopButton);
         this.add(clearButton);
@@ -78,8 +78,11 @@ public class SouthPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-//            if(checkBox.isSelected())
-//            boardPanel.setPeriodc(true);
+            if (checkBox.isSelected())
+                boardPanel.setPeriodic(true);
+            else
+                boardPanel.setPeriodic(false);
+
         }
     }
 }
