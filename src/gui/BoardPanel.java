@@ -1,5 +1,7 @@
 package gui;
 
+import data.Data;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,15 +15,18 @@ public class BoardPanel extends JPanel {
 
     private static final int PANELSIZE = Data.SIZE;
     private static final int CELLSIZE = Data.CELLSIZE;
+    public Timer timer;
     private int[][] grid;
     private int generationCounter;
     private boolean periodic = false;
     private int selectedIndex = 0;
-    public Timer timer;
     private int width = PANELSIZE;
     private int height = PANELSIZE;
+    private BoardMouseListener boardMouseListener;
 
     public BoardPanel() {
+        boardMouseListener = new BoardMouseListener(this);
+        this.addMouseListener(boardMouseListener);
         timer = new Timer(500, new ActionListener() {
 
             @Override
@@ -36,8 +41,12 @@ public class BoardPanel extends JPanel {
 
     public void clearAll() {
         this.grid = new int[this.width / CELLSIZE][this.height / CELLSIZE];
-//        setupGrid();
         generationCounter = 0;
+        repaint();
+    }
+
+    public void addLife(int x, int y){
+        grid[x][y] = 1;
         repaint();
     }
 

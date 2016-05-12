@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 /**
  * Created by robert on 23.04.16.

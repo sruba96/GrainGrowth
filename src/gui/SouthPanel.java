@@ -1,6 +1,6 @@
 package gui;
 
-import model.StructureType;
+import domain.StructureType;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package gui;
+package data;
 
 /**
  * Created by pawel on 08.05.16.
