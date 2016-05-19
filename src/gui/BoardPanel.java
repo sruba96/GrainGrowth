@@ -43,8 +43,9 @@ public class BoardPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                grid = rules.generationUP(grid,true);
+                grid = rules.generationUP(grid,periodic,selectedIndex);
                 repaint();
+                generationCounter++;
             }
         });
 
@@ -80,7 +81,7 @@ public class BoardPanel extends JPanel {
         super.paintComponent(g);
         Color gColor = g.getColor();
 
-        g.drawString("Pokolenie: " + generationCounter++, 0, 10);
+        g.drawString("Pokolenie: " + generationCounter, 0, 10);
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] > 0) {

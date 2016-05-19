@@ -5,10 +5,13 @@ package domain;
  */
 public enum StructureType {
 
-    NONE("None"),
-    GLIDER("Glider"),
-    STATIC("Static"),
-    OSCILLATOR("Oscillator");
+    MOORA("Moora"),
+    VONNEUMANA("von Neumana"),
+    HEXAGONLLEFT("Hexagonalne lewe"),
+    HEXAGONLRIGHT("Hexagonalne prawe"),
+    HEXAGONLRAND("Hexagonalne losowe"),
+    PENTAGONAL("Pentagonal"),
+    RANDOMAUTOMAT("Random");
 
     private final String text;
 
