@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 /**
  * Created by pawel on 09.05.16.
  */
@@ -10,6 +12,8 @@ public class Rules {
     private int gridSize;
     private boolean periodic;
     private int selectedIndex;
+
+    private int NW, N, NE, W, E, SW, S, SE;
 
     public static void main(String[] args) {
 
@@ -37,7 +41,7 @@ public class Rules {
 
     private void updateCell(int x, int y) {
 
-        int NW, N, NE, W, E, SW, S, SE;
+
 
         NW = checkCell(x - 1, y - 1);
         N = checkCell(x - 1, y);
@@ -60,17 +64,52 @@ public class Rules {
                 break;
 
             case 2:
-                ID = takeID(N, E, W, S, SW, NW);
+                ID = takeID(N, E, W, S, NW, SE);
                 break;
 
             case 3:
-                ID = takeID(N, E, W, S, NE, SE);
+                ID = takeID(N, E, W, S, NE, SW);
+                break;
+
+            case 4:
+                ID  = randHexagonal();
+                break;
+            case 5:
+                ID = randPentagonal();
                 break;
 
         }
 
         if(ID > 0)
             nextGrid[x][y] = ID;
+
+    }
+
+    private int randHexagonal() {
+        Random random = new Random();
+
+        int r = random.nextInt(100);
+
+        if(r>50)
+            return takeID(N, E, W, S, NW, SE);
+        else
+            return takeID(N, E, W, S, NE, SW);
+
+    }
+
+    private int randPentagonal() {
+        Random random = new Random();
+
+        int r = random.nextInt(100);
+
+        if(r<26)
+            return takeID(N, E, W, NW, NE);
+        else if(r>25 && r<50)
+            return takeID(N, W, S, NW, SW);
+        else if(r>50 && r<75)
+            return takeID(E, W, S, SE, SW);
+        else
+            return takeID(N, E, S, NE, SE);
 
     }
 

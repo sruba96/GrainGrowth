@@ -28,15 +28,16 @@ public class BoardPanel extends JPanel {
     private int width = PANELSIZE;
     private int height = PANELSIZE;
     private BoardMouseListener boardMouseListener;
-    private List<Germ> germList;
+    private List<Germ> germList = new ArrayList<Germ>();
     private Random random = new Random();
-    private Rules rules;
+    private Rules rules = new Rules();
+    private int SIZE;
 
     public BoardPanel() {
-        germList = new ArrayList<Germ>();
+
         Germ germ = new Germ(Color.DARK_GRAY);
         germList.add(0, germ);
-        rules = new Rules();
+
         boardMouseListener = new BoardMouseListener(this);
         this.addMouseListener(boardMouseListener);
         timer = new Timer(500, new ActionListener() {
@@ -56,6 +57,7 @@ public class BoardPanel extends JPanel {
         this.grid = new int[this.width / CELLSIZE][this.height / CELLSIZE];
         generationCounter = 0;
         repaint();
+        this.SIZE = this.width / CELLSIZE;
     }
 
     public void addLife(int x, int y) {
@@ -109,5 +111,10 @@ public class BoardPanel extends JPanel {
 
     public void setSelectedIndex(int selectedIndex) {
         this.selectedIndex = selectedIndex;
+    }
+
+
+    public int getSIZE() {
+        return SIZE;
     }
 }

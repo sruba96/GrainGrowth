@@ -11,6 +11,7 @@ public class MainFrame extends JFrame {
 
     BoardPanel boardPanel;
     SouthPanel southPanel;
+    NorthPanel northPanel;
 
     public MainFrame() {
         super("Grain Growth");
@@ -20,6 +21,10 @@ public class MainFrame extends JFrame {
 
         southPanel = new SouthPanel(boardPanel);
         this.add(southPanel, BorderLayout.SOUTH);
+
+        northPanel = new NorthPanel(boardPanel);
+        this.add(northPanel, BorderLayout.NORTH);
+
     }
 
     public static void main(String[] args) {
