@@ -117,4 +117,9 @@ public class BoardPanel extends JPanel {
     public int getSIZE() {
         return SIZE;
     }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
 }

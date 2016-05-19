@@ -19,7 +19,7 @@ public class NorthPanel extends JPanel {
         this.boardPanel = boardPanel;
 
         jTextField = new JTextField("100");
-        jTextField.setSize(30,20);
+        jTextField.setSize(30, 20);
 
         JButton randomButton = new JButton("Random");
         randomButton.addActionListener(new RandomButtonListener());
@@ -30,6 +30,7 @@ public class NorthPanel extends JPanel {
         // TODO: 19.05.16 I was creating NorthPanel ... with some functions to add life
         this.add(jTextField);
         this.add(randomButton);
+        this.add(notRandomButton);
     }
 
     private class RandomButtonListener implements ActionListener {
@@ -50,7 +51,7 @@ public class NorthPanel extends JPanel {
                 x = random.nextInt(size);
                 y = random.nextInt(size);
 
-                boardPanel.addLife(x,y);
+                boardPanel.addLife(x, y);
             }
 
 
@@ -59,26 +60,23 @@ public class NorthPanel extends JPanel {
 
     private class NotRandomButtonListener implements ActionListener {
 
-        Random random = new Random();
 
-        int size = boardPanel.getSIZE();
-        int x, y;
 
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            int howMany = Integer.parseInt(jTextField.getText());
-            System.out.println(howMany);
-            for (int i = 0; i < howMany; i++) {
+            int krok = 3;
+            krok = Integer.parseInt(jTextField.getText());
+
+            if(krok < 3 || krok >50)
+                krok = 3;
 
 
-                x = random.nextInt(size);
-                y = random.nextInt(size);
-
-                boardPanel.addLife(x,y);
+            for (int i = krok; i < 50; i=i+krok) {
+                for (int j = krok; j < 50 ; j=j+krok) {
+                    boardPanel.addLife(i,j);
+                }
             }
-
-
         }
     }
 }

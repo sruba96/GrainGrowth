@@ -32,16 +32,16 @@ public class Rules {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 if (grid[i][j] == 0)
-                    updateCell(i, j);
+                    updateCell(i, j,selectedIndex);
             }
         }
 
         return cloneArray(nextGrid);
     }
 
-    private void updateCell(int x, int y) {
+    private void updateCell(int x, int y, int index) {
 
-
+        int selectedIndexMy = index;
 
         NW = checkCell(x - 1, y - 1);
         N = checkCell(x - 1, y);
@@ -54,7 +54,7 @@ public class Rules {
 
         int ID = 0;
 
-        switch (selectedIndex) {
+        switch (selectedIndexMy) {
             case 0:
                 ID = takeID(N, E, W, S, SW, SE, NE, NW);
                 break;
@@ -77,11 +77,23 @@ public class Rules {
             case 5:
                 ID = randPentagonal();
                 break;
+            case 6:
+                randRandom(x,y);
+                break;
 
         }
 
         if(ID > 0)
             nextGrid[x][y] = ID;
+
+    }
+
+    private void randRandom(int x, int y) {
+        Random rand = new Random();
+        int index = 0;
+        index = rand.nextInt(6);
+
+        updateCell(x,y,index);
 
     }
 
