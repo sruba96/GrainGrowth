@@ -55,8 +55,10 @@ public class SouthPanel extends JPanel {
     private class StopButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (boardPanel.timer.isRunning())
+            if (boardPanel.timer.isRunning()) {
                 boardPanel.timer.stop();
+
+            }
         }
     }
 

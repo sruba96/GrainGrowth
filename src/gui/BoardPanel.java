@@ -21,7 +21,8 @@ public class BoardPanel extends JPanel {
     private static final int PANELSIZE = Data.SIZE;
     private static final int CELLSIZE = Data.CELLSIZE;
     public Timer timer;
-    private int[][] grid;
+    public Timer recrystalizationTimer;
+    public int[][] grid;
     private int generationCounter;
     private boolean periodic = false;
     private int selectedIndex = 0;
@@ -30,23 +31,40 @@ public class BoardPanel extends JPanel {
     private BoardMouseListener boardMouseListener;
     private List<Germ> germList = new ArrayList<Germ>();
     private Random random = new Random();
-    private Rules rules = new Rules();
+    public Rules rules = new Rules(this);
     private int SIZE;
+
+    private boolean recrystalizationIsRunning = false;
 
     public BoardPanel() {
 
         Germ germ = new Germ(Color.DARK_GRAY);
         germList.add(0, germ);
 
+
+
+
         boardMouseListener = new BoardMouseListener(this);
         this.addMouseListener(boardMouseListener);
-        timer = new Timer(500, new ActionListener() {
+        timer = new Timer(50, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                grid = rules.generationUP(grid,periodic,selectedIndex);
+                grid = rules.generationUP(grid, periodic, selectedIndex);
                 repaint();
                 generationCounter++;
+            }
+        });
+
+        recrystalizationTimer = new Timer(250, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                grid = rules.recrystalizat(grid, periodic, selectedIndex);
+                repaint();
+//                if(rules.growingIsDone)
+                rules.recrystalizationUp();
+                //generationCounter++;
             }
         });
 
@@ -83,16 +101,21 @@ public class BoardPanel extends JPanel {
         super.paintComponent(g);
         Color gColor = g.getColor();
 
-        g.drawString("Pokolenie: " + generationCounter, 0, 10);
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] > 0) {
-                    g.setColor(germList.get(grid[i][j]).getColor());
-                    g.fillRect(j * CELLSIZE, i * CELLSIZE, CELLSIZE, CELLSIZE);
+
+//        if (recrystalizationIsRunning) {
+//            //recrystalization painting
+//        } else {
+
+            g.drawString("Pokolenie: " + generationCounter, 0, 10);
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[i].length; j++) {
+                    if (grid[i][j] > 0) {
+                        g.setColor(germList.get(grid[i][j]).getColor());
+                        g.fillRect(j * CELLSIZE, i * CELLSIZE, CELLSIZE, CELLSIZE);
+                    }
                 }
             }
-        }
-
+//        }
         g.setColor(gColor);
     }
 
